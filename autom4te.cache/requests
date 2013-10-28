@@ -109,6 +109,7 @@
                         'AM_GNU_GETTEXT_INTL_SUBDIR' => 1,
                         'AM_MAKEFILE_INCLUDE' => 1,
                         '_m4_warn' => 1,
+                        'AC_PREREQ' => 1,
                         'AM_PROG_CXX_C_O' => 1,
                         '_AM_COND_ENDIF' => 1,
                         '_AM_MAKEFILE_INCLUDE' => 1,
@@ -138,6 +139,7 @@
                         'AC_DEFINE_TRACE_LITERAL' => 1,
                         'AM_POT_TOOLS' => 1,
                         'm4_include' => 1,
+                        'AC_PROG_CC' => 1,
                         '_AM_COND_ELSE' => 1,
                         'AC_SUBST_TRACE' => 1
                       }
