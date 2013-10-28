@@ -1,0 +1,3 @@
+AUTO_OPTIONS=foreign
+bin_PROGRAMS=JHttpServer
+JHttpServer_SOURCES=jhttpserver.c
