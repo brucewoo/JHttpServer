@@ -2,7 +2,7 @@
 all:
 
 # Set libraries external to this component.
-EXTERNAL_LIBS = -levent -lpthread
+EXTERNAL_LIBS = -lpthread
 
 # Section 2 ############################################################################
 # Set common flags recognized by automake.
@@ -12,5 +12,5 @@ AM_CPPFLAGS = -I..
 
 AUTO_OPTIONS=foreign
 bin_PROGRAMS=JHttpServer
-JHttpServer_SOURCES=jhttpserver.c
+JHttpServer_SOURCES=jhttpserver.c http_connect.c
 
