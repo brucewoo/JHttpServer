@@ -1,14 +1,11 @@
 /* config.h.  Generated from config.h.in by configure.  */
-/* config.h.in.  Generated from configure.in by autoheader.  */
-
-/* Define to 1 if you have the `event' library (-levent). */
-#define HAVE_LIBEVENT 1
+/* config.h.in.  Generated from configure.ac by autoheader.  */
 
 /* Define to 1 if you have the `pthread' library (-lpthread). */
 #define HAVE_LIBPTHREAD 1
 
 /* Name of package */
-#define PACKAGE "JHttpServer"
+#define PACKAGE "jhttpserver"
 
 /* Define to the address where bug reports for this package should be sent. */
 #define PACKAGE_BUGREPORT "wuyouqiangxihuan@163.com"
