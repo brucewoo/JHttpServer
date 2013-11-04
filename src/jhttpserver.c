@@ -79,9 +79,9 @@ int main(int argc, char* argv[])
 	inet_pton(AF_INET, ip, &address.sin_addr);
 
 	ret = bind(listen_fd, (struct sockaddr *)&address, sizeof(address));
-	assert(ret > 0);
+	assert(ret >= 0);
 	ret = listen(listen_fd, 5);
-	assert(ret > 0);
+	assert(ret >= 0);
 
 	struct epoll_event events[MAX_EVENT_NUMBER];
 	epollfd = epoll_create(5);

@@ -21,7 +21,7 @@ struct thread_pool_t
 	int conn_number;	//请求连接的个数
 	int max_resquests;	//请求队列中允许的最大请求数
 	pthread_t* threads;	//描述线程池的数组，
-	queue_t* conn_head;
+	queue_t conn_head;
 	pthread_mutex_t locker;
 	sem_t sem;
 	bool stop;
@@ -38,13 +38,13 @@ void* worker(void* arg)
 		sem_wait(&pool->sem);
 		pthread_mutex_lock(&pool->locker);
 
-		if (queue_empty(pool->conn_head))
+		if (queue_empty(&pool->conn_head))
 		{
 			pthread_mutex_unlock(&pool->locker);
 			continue;
 		}
 
-		queue_t* curr_node = queue_head(pool->conn_head);
+		queue_t* curr_node = queue_head(&pool->conn_head);
 		queue_remove(curr_node);
 		pthread_mutex_unlock(&pool->locker);
 		http_conn* conn = (http_conn *) ((u_char *) curr_node - ((size_t) &((http_conn *)0)->head));
@@ -80,7 +80,7 @@ thread_pool* create_thread_pool(int thread_number, int max_requests)
 	pool->conn_number = 0;
 	pool->thread_number = thread_number;
 	pool->max_resquests = max_requests;
-	queue_init(pool->conn_head);
+	queue_init(&pool->conn_head);
 
 	if (sem_init(&pool->sem, 0, 0) != 0)
 	{
@@ -141,7 +141,7 @@ bool add_conn(thread_pool *pool, http_conn* conn)
 		return FALSE;
 	}
 
-	queue_insert_tail(pool->conn_head, &conn->head);
+	queue_insert_tail(&pool->conn_head, &conn->head);
 	pthread_mutex_unlock(&pool->locker);
 	sem_post(&pool->sem);
 	return TRUE;
