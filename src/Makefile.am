@@ -12,5 +12,5 @@ AM_CPPFLAGS = -I..
 
 AUTO_OPTIONS=foreign
 bin_PROGRAMS=JHttpServer
-JHttpServer_SOURCES=jhttpserver.c http_connect.c
+JHttpServer_SOURCES=jhttpserver.c http_connect.c log.c
 

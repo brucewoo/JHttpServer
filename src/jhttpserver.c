@@ -14,6 +14,7 @@
 
 #include "http_connect.h"
 #include "thread_pool.h"
+#include "log.h"
 
 #define MAX_FD 65536
 #define MAX_EVENT_NUMBER 10000
@@ -44,6 +45,8 @@ void show_error(int conn_fd, const char* info)
 	close(conn_fd);
 }
 
+log_handle_t g_log;
+
 int main(int argc, char* argv[])
 {
 	if (argc <= 2)
@@ -52,8 +55,16 @@ int main(int argc, char* argv[])
 		return 0;
 	}
 
+	log_globals_init(&g_log);
+	log_init(&g_log, "jhttpserver.log", NULL);
+	log_set_loglevel(&g_log, LOG_DEBUG);
+
+
+	printf("%d\n", g_log.loglevel);
 	const char* ip = argv[1];
 	int port = atoi(argv[2]);
+
+	INFO(&g_log, "jhttpserver", "%s : %d", ip, port);
 
 	add_signal(SIGPIPE, SIG_IGN, TRUE);
 

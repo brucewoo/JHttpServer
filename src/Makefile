@@ -90,7 +90,8 @@ CONFIG_CLEAN_FILES =
 CONFIG_CLEAN_VPATH_FILES =
 am__installdirs = "$(DESTDIR)$(bindir)"
 PROGRAMS = $(bin_PROGRAMS)
-am_JHttpServer_OBJECTS = jhttpserver.$(OBJEXT) http_connect.$(OBJEXT)
+am_JHttpServer_OBJECTS = jhttpserver.$(OBJEXT) http_connect.$(OBJEXT) \
+	log.$(OBJEXT)
 JHttpServer_OBJECTS = $(am_JHttpServer_OBJECTS)
 JHttpServer_LDADD = $(LDADD)
 AM_V_P = $(am__v_P_$(V))
@@ -242,7 +243,7 @@ EXTERNAL_LIBS = -lpthread
 # USE flags AM_CXXFLAGS, AM_CFLAGS, AM_CPPFLAGS, AM_LDFLAGS, LDADD in this section.
 AM_CPPFLAGS = -I..
 AUTO_OPTIONS = foreign
-JHttpServer_SOURCES = jhttpserver.c http_connect.c
+JHttpServer_SOURCES = jhttpserver.c http_connect.c log.c
 all: all-am
 
 .SUFFIXES:
@@ -332,6 +333,7 @@ distclean-compile:
 
 include ./$(DEPDIR)/http_connect.Po
 include ./$(DEPDIR)/jhttpserver.Po
+include ./$(DEPDIR)/log.Po
 
 .c.o:
 	$(AM_V_CC)$(COMPILE) -MT $@ -MD -MP -MF $(DEPDIR)/$*.Tpo -c -o $@ $<
