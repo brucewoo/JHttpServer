@@ -991,7 +991,8 @@ int cmd_log_init(log_handle_t* log, const char *filename) {
 	return 0;
 }
 
-int cmd_log(log_handle_t* log, const char *domain, const char *fmt, ...) {
+int cmd_log(log_handle_t* log, const char *domain, const char *fmt, ...)
+{
 	va_list ap;
 	char timestr[64];
 	struct timeval tv = { 0, };
@@ -1073,13 +1074,15 @@ int j_vasprintf(char **string_ptr, const char *format, va_list arg)
 	int rv = 0;
 
 	if (!string_ptr || !format)
+	{
 		return -1;
+	}
 
 	va_copy(arg_save, arg);
 
 	size = vsnprintf(NULL, 0, format, arg);
 	size++;
-	str = malloc(size * sizeof(char));
+	str = (char*)malloc(size * sizeof(char));
 	if (str == NULL)
 	{
 		/* log is done in malloc itself */

@@ -94,7 +94,8 @@ void init(http_conn* conn)
 
 void close_connect(http_conn* conn)
 {
-	if (conn->sockfd != -1) {
+	if (conn->sockfd != -1)
+	{
 		remove_fd(epollfd, conn->sockfd);
 		conn->sockfd = -1;
 		user_count--;
@@ -483,7 +484,7 @@ http_code do_request(http_conn* conn)
 
 char* get_line(http_conn* conn)
 {
-
+	return conn->read_buf + conn->start_line;
 }
 
 line_status parse_line(http_conn* conn)

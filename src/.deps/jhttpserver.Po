@@ -71,7 +71,7 @@ jhttpserver.o: jhttpserver.c /usr/include/stdc-predef.h \
  /usr/include/x86_64-linux-gnu/bits/stat.h /usr/include/fcntl.h \
  /usr/include/x86_64-linux-gnu/bits/fcntl.h \
  /usr/include/x86_64-linux-gnu/bits/fcntl-linux.h \
- /usr/include/x86_64-linux-gnu/bits/fcntl2.h http_connect.h \
+ /usr/include/x86_64-linux-gnu/bits/fcntl2.h jhttpserver.h http_connect.h \
  /usr/include/arpa/inet.h /usr/include/assert.h /usr/include/pthread.h \
  /usr/include/sched.h /usr/include/x86_64-linux-gnu/bits/sched.h \
  /usr/include/x86_64-linux-gnu/bits/setjmp.h \
@@ -269,6 +269,8 @@ jhttpserver.o: jhttpserver.c /usr/include/stdc-predef.h \
 /usr/include/x86_64-linux-gnu/bits/fcntl-linux.h:
 
 /usr/include/x86_64-linux-gnu/bits/fcntl2.h:
+
+jhttpserver.h:
 
 http_connect.h:
 

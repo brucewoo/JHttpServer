@@ -12,18 +12,16 @@
 #include <netinet/in.h>
 #include <fcntl.h>
 
-#include "http_connect.h"
-#include "thread_pool.h"
-#include "log.h"
+#include "jhttpserver.h"
 
 #define MAX_FD 65536
 #define MAX_EVENT_NUMBER 10000
 
 extern int epollfd;
 extern int user_count;
+log_handle_t g_log;
 
 extern int add_fd(int epollfd, int fd, bool one_shot);
-extern int remove_fd(int epollfd, int fd);
 
 void add_signal(int signal, void (handler)(int), bool restart)
 {
@@ -40,12 +38,10 @@ void add_signal(int signal, void (handler)(int), bool restart)
 
 void show_error(int conn_fd, const char* info)
 {
-	printf("%s", info);
+	ERROR(&g_log, "jhttpserver", "%s", info);
 	send(conn_fd, info, strlen(info), 0);
 	close(conn_fd);
 }
-
-log_handle_t g_log;
 
 int main(int argc, char* argv[])
 {
@@ -59,8 +55,6 @@ int main(int argc, char* argv[])
 	log_init(&g_log, "jhttpserver.log", NULL);
 	log_set_loglevel(&g_log, LOG_DEBUG);
 
-
-	printf("%d\n", g_log.loglevel);
 	const char* ip = argv[1];
 	int port = atoi(argv[2]);
 
@@ -72,6 +66,7 @@ int main(int argc, char* argv[])
 	if (pool == NULL)
 	{
 		printf("create thread pool is failed.");
+		ERROR(&g_log, "jhttpserver", "create thread pool is failed.");
 		return 1;
 	}
 
@@ -97,9 +92,9 @@ int main(int argc, char* argv[])
 	struct epoll_event events[MAX_EVENT_NUMBER];
 	epollfd = epoll_create(5);
 	assert(epollfd != -1);
-	add_fd(epollfd, listen_fd, FALSE);
+	add_fd(epollfd, listen_fd, false);
 
-	while (TRUE)
+	while (true)
 	{
 		int number = epoll_wait(epollfd, events, MAX_EVENT_NUMBER, -1);
 		if ((number < 0) && (errno != EINTR))

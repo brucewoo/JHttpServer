@@ -55,6 +55,7 @@ void* worker(void* arg)
 		}
 		process(conn);
 	}
+	return NULL;
 }
 
 thread_pool* create_thread_pool(int thread_number, int max_requests)

@@ -48,6 +48,9 @@ enum LINE_STATUS {
 
 enum BOOL {
 	FALSE = 0,
-	TRUE
+	false = 0,
+	TRUE = 1,
+	true = 1
 };
+
 #endif /* COMMON_H_ */
